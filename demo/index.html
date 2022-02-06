@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="Description" content="Put your description here." />
+    <base href="/" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 50px;
+        font-family: sans-serif;
+      }
+      #fields {
+        margin-bottom: 10px;
+      }
+      #getData {
+        margin-left: 10px;
+        font-weight: bold;
+      }
+    </style>
+    <title>Project one:</title>
+  </head>
+
+  <body>
+    <div id="fields">
+      <input id="load" type="text" placeholder="Search Images" />
+      <button id="getData">Launch</button>
+    </div>
+
+    <nasa-image-search id="images"></nasa-image-search>
+    <script type="module">
+      import './src/NasaImageSearch.js';
+
+      document.querySelector('#getData').addEventListener('click', e => {
+        document.querySelector('#images').name =
+          document.querySelector('#load').value;
+      });
+    </script>
+  </body>
+</html>
