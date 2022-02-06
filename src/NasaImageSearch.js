@@ -9,6 +9,7 @@ class NasaImageSearch extends LitElement {
     this.name = 'moon';
     this.nasaEndpoint =
       'https://images-api.nasa.gov/search?q=moon&media_type=image';
+    this.page = 1;
   }
 
   static get properties() {
@@ -20,6 +21,7 @@ class NasaImageSearch extends LitElement {
         attribute: 'load-data',
       },
       name: { type: String },
+      page: { type: Number },
     };
   }
 
@@ -35,22 +37,12 @@ class NasaImageSearch extends LitElement {
       if (propName === 'name' && this[propName]) {
         this.getData();
       }
-      // when dates changes, fire an event for others to react to if they wish
-      else if (propName === 'dates') {
-        this.dispatchEvent(
-          new CustomEvent('results-changed', {
-            detail: {
-              value: this.dates,
-            },
-          })
-        );
-      }
     });
   }
 
   async getData() {
     return fetch(
-      `https://images-api.nasa.gov/search?q=${this.name}&media_type=image`
+      `https://images-api.nasa.gov/search?q=${this.name}&media_type=image&page=${this.page}`
     )
       .then(resp => {
         if (resp.ok) {

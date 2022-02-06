@@ -18,7 +18,14 @@
       #fields {
         margin-bottom: 10px;
       }
+      #page {
+        margin-top: 20px;
+      }
       #getData {
+        margin-left: 10px;
+        font-weight: bold;
+      }
+      #getPage {
         margin-left: 10px;
         font-weight: bold;
       }
@@ -30,6 +37,9 @@
     <div id="fields">
       <input id="load" type="text" placeholder="Search Images" />
       <button id="getData">Launch</button>
+      <br />
+      <input id="page" type="text" placeholder="Page Number" />
+      <button id="getPage">Get</button>
     </div>
 
     <nasa-image-search id="images"></nasa-image-search>
@@ -39,6 +49,11 @@
       document.querySelector('#getData').addEventListener('click', e => {
         document.querySelector('#images').name =
           document.querySelector('#load').value;
+      });
+
+      document.querySelector('#getPage').addEventListener('click', e => {
+        document.querySelector('#images').name =
+          document.querySelector('#page').value;
       });
     </script>
   </body>
