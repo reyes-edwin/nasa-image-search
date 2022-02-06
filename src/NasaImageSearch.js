@@ -7,8 +7,6 @@ class NasaImageSearch extends LitElement {
     this.images = [];
     this.loadData = false;
     this.name = 'moon';
-    this.nasaEndpoint =
-      'https://images-api.nasa.gov/search?q=moon&media_type=image';
     this.page = 1;
   }
 
@@ -36,6 +34,8 @@ class NasaImageSearch extends LitElement {
     changedProperties.forEach((oldValue, propName) => {
       if (propName === 'name' && this[propName]) {
         this.getData();
+      } else if(propName ==='page' && this[propName]) {
+        this.getData();
       }
     });
   }
@@ -52,7 +52,6 @@ class NasaImageSearch extends LitElement {
         return false;
       })
       .then(data => {
-        console.log(data);
         this.images = [];
         // console.log(data.collection.items[0].links[0].href);
 
@@ -63,9 +62,7 @@ class NasaImageSearch extends LitElement {
             heading: data.collection.items[i].data[0].title,
             author: data.collection.items[i].data[0].secondary_creator,
           };
-
           this.images.push(element);
-          console.log(element);
         }
       });
   }
