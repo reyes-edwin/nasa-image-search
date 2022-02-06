@@ -12,7 +12,7 @@ npm i nasa-image-search
 
 ```html
 <script type="module">
-  import 'nasa-image-search/nasa-image-search.js';
+  import './src/NasaImageSearch.js';
 </script>
 
 <nasa-image-search></nasa-image-search>
