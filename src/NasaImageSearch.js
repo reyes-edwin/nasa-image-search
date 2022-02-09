@@ -6,8 +6,9 @@ class NasaImageSearch extends LitElement {
     super();
     this.images = [];
     this.loadData = false;
-    this.name = 'moon';
-    this.page = 1;
+    this.name = '';
+    this.page = 0;
+    this.listOnly = false;
   }
 
   static get properties() {
@@ -20,6 +21,11 @@ class NasaImageSearch extends LitElement {
       },
       name: { type: String },
       page: { type: Number },
+      listOnly: {
+        type: Boolean,
+        reflect: true,
+        attribute: 'list-only',
+      },
     };
   }
 
@@ -34,7 +40,7 @@ class NasaImageSearch extends LitElement {
     changedProperties.forEach((oldValue, propName) => {
       if (propName === 'name' && this[propName]) {
         this.getData();
-      } else if(propName ==='page' && this[propName]) {
+      } else if (propName === 'page' && this[propName]) {
         this.getData();
       }
     });
@@ -64,6 +70,10 @@ class NasaImageSearch extends LitElement {
           };
           this.images.push(element);
         }
+        // tell the browser to wait for 1 second before setting this back to what it was
+        setTimeout(() => {
+          this.loadData = false;
+        }, 1000);
       });
   }
 
@@ -72,27 +82,37 @@ class NasaImageSearch extends LitElement {
       :host([view='list']) ul {
         margin: 20px;
       }
-      input {
-        margin: 20px;
-      }
     `;
   }
 
   render() {
-    return html`
-      ${this.images.map(
-        item => html` <accent-card
-          image-src="${item.image}"
-          accent-color="red"
-          accent-heading
-          style="max-width:1000px;"
-        >
-          <div slot="heading">${item.heading}</div>
-          <div slot="content"><b>Description:</b> ${item.descriptions}</div>
-          <div slot="content"><b>Author:</b> ${item.author}</div>
-        </accent-card>`
-      )}
-    `;
+    return html` ${this.listOnly === true
+      ? html`
+          <ul>
+            ${this.images.map(
+              item => html`
+                <li>
+                  <b>Image src: </b>${item.image} -
+                  <b>Heading: </b>${item.heading} -
+                  <b>Description: </b>${item.descriptions} -
+                  <b>Author:</b>${item.author}
+                </li>
+              `
+            )}
+          </ul>
+        `
+      : html` ${this.images.map(
+          item => html` <accent-card
+            image-src="${item.image}"
+            accent-color="red"
+            accent-heading
+            style="max-width:1000px;"
+          >
+            <div slot="heading">${item.heading}</div>
+            <div slot="content">${item.descriptions}</div>
+            <div slot="content">Credit: ${item.author}</div>
+          </accent-card>`
+        )}`}`;
   }
 }
 

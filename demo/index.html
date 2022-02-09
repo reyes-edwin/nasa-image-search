@@ -15,43 +15,45 @@
         padding: 50px;
         font-family: sans-serif;
       }
+
       #fields {
-        margin-bottom: 10px;
-      }
-      #page {
-        margin-top: 20px;
+        margin-bottom: 30px;
       }
       #getData {
         margin-left: 10px;
         font-weight: bold;
       }
-      #getPage {
+      #page {
         margin-left: 10px;
-        font-weight: bold;
       }
+      #dataOnly {
+        margin-top: 20px;
+      }
+
     </style>
-    <title>Project one:</title>
+    <title>NasaImageSearch</title>
   </head>
 
   <body>
     <div id="fields">
       <input id="load" type="text" placeholder="Search Images" />
-      <button id="getData">Launch</button>
-      <br />
       <input id="page" type="text" placeholder="Page Number" />
-      <button id="getPage">Get</button>
+      <button id="getData">Search</button>
+      <br>
+      <input id="dataOnly" type="checkbox">Return Data Only</input>
     </div>
 
     <nasa-image-search id="images"></nasa-image-search>
     <script type="module">
       import './src/NasaImageSearch.js';
+      const checkbox = document.getElementById('dataOnly');
+      checkbox.addEventListener('change', (e) => {
+      e.currentTarget.checked ? document.querySelector("#images").listOnly = true : document.querySelector("#images").listOnly = false;
+    })
 
       document.querySelector('#getData').addEventListener('click', e => {
         document.querySelector('#images').name =
           document.querySelector('#load').value;
-      });
-
-      document.querySelector('#getPage').addEventListener('click', e => {
         document.querySelector('#images').page =
           document.querySelector('#page').value;
       });
