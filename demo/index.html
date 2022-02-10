@@ -9,38 +9,106 @@
     <meta name="Description" content="Put your description here." />
     <base href="/" />
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
       html,
       body {
-        margin: 0;
-        padding: 50px;
-        font-family: sans-serif;
+        margin: 30px;
+        font-family: 'Lato', sans-serif;
+        background-color: #f8f8f8;
       }
 
       #fields {
         margin-bottom: 30px;
       }
       #getData {
-        margin-left: 10px;
-        font-weight: bold;
-      }
-      #page {
-        margin-left: 10px;
-      }
-      #dataOnly {
         margin-top: 20px;
+        font-weight: bold;
+        padding: 10px;
+        width: 100px;
+        font-weight: 700;
+        font-size: 16px;
+        border-radius: 5px;
       }
 
+      #getData:hover {
+        color: white;
+        background-color: #0b3d91;
+      }
+      #load {
+        margin-top: 5px;
+      }
+      #dataOnly {
+        margin-top: 10px;
+      }
+
+      #load {
+        width: 200px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      #page {
+        margin-top: 5px;
+        margin-bottom: 10px;
+        padding: 10px;
+        width: 200px;
+      }
+
+      #start {
+        margin-top: 5px;
+        margin-bottom: 10px;
+        padding: 10px;
+        width: 200px;
+      }
+
+      #end {
+        margin-top: 5px;
+        padding: 10px;
+        width: 200px;
+      }
+
+      img {
+        width: 200px;
+        margin-bottom: 20px;
+      }
+
+      input {
+        border: 2px solid black;
+        border-radius: 10px;
+      }
+      label {
+        font-size: 18px;
+        font-weight: 700;
+      }
     </style>
     <title>NasaImageSearch</title>
   </head>
 
   <body>
+    <header>
+      <img src='../images/nasa.png' alt="nasa-logo">
+    </header>
     <div id="fields">
-      <input id="load" type="text" placeholder="Search Images" />
-      <input id="page" type="text" placeholder="Page Number" />
-      <button id="getData">Search</button>
+      <label for="load">Search Images</label>
       <br>
-      <input id="dataOnly" type="checkbox">Return Data Only</input>
+      <input id="load" type="text" placeholder="Search Images" />
+      <br>
+      <label for="page">Page Number</label>
+      <br>
+      <input id="page" type="text" placeholder="Page Number" />
+      <br>
+      <label for="start">Start Year</label>
+      <br>
+      <input id="start" type="text" placeholder="Start Year">
+      <br>
+      <label for="end">End Year</label>
+      <br>
+      <input id="end" type="text" placeholder="End Year">
+      <br>
+      <label for="dataOnly">Data only:</label>
+      <input id="dataOnly" type="checkbox"></input>
+      <br>
+      <button id="getData">Search</button>
     </div>
 
     <nasa-image-search id="images"></nasa-image-search>
@@ -52,10 +120,10 @@
     })
 
       document.querySelector('#getData').addEventListener('click', e => {
-        document.querySelector('#images').name =
-          document.querySelector('#load').value;
-        document.querySelector('#images').page =
-          document.querySelector('#page').value;
+        document.querySelector('#images').name = document.querySelector('#load').value;
+        document.querySelector('#images').page = document.querySelector('#page').value;
+        document.querySelector('#images').year_start = document.querySelector('#start').value; 
+        document.querySelector('#images').year_end = document.querySelector('#end').value;
       });
     </script>
   </body>

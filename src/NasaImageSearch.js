@@ -6,9 +6,11 @@ class NasaImageSearch extends LitElement {
     super();
     this.images = [];
     this.loadData = false;
-    this.name = '';
-    this.page = 0;
+    this.name = 'moon';
+    this.page = 1;
     this.listOnly = false;
+    this.year_start = 2000;
+    this.year_end = 2021;
   }
 
   static get properties() {
@@ -26,14 +28,9 @@ class NasaImageSearch extends LitElement {
         reflect: true,
         attribute: 'list-only',
       },
+      year_start: { type: Number },
+      year_end: { type: Number },
     };
-  }
-
-  firstUpdated(changedProperties) {
-    if (super.firstUpdated) {
-      super.firstUpdated(changedProperties);
-    }
-    this.getData();
   }
 
   updated(changedProperties) {
@@ -48,19 +45,16 @@ class NasaImageSearch extends LitElement {
 
   async getData() {
     return fetch(
-      `https://images-api.nasa.gov/search?q=${this.name}&media_type=image&page=${this.page}`
+      `https://images-api.nasa.gov/search?q=${this.name}&media_type=image&page=${this.page}&year_start=${this.year_start}&year_end=${this.year_end}`
     )
       .then(resp => {
         if (resp.ok) {
           return resp.json();
         }
-
         return false;
       })
       .then(data => {
         this.images = [];
-        // console.log(data.collection.items[0].links[0].href);
-
         for (let i = 0; i < data.collection.items.length; i++) {
           const element = {
             image: data.collection.items[i].links[0].href,
@@ -70,7 +64,7 @@ class NasaImageSearch extends LitElement {
           };
           this.images.push(element);
         }
-        // tell the browser to wait for 1 second before setting this back to what it was
+        // tell the browser to wait for 1 second
         setTimeout(() => {
           this.loadData = false;
         }, 1000);
@@ -92,26 +86,27 @@ class NasaImageSearch extends LitElement {
             ${this.images.map(
               item => html`
                 <li>
-                  <b>Image src: </b>${item.image} -
+                  <a href="${item.image}" target="_blank"><b>Image Source</b></a>-
                   <b>Heading: </b>${item.heading} -
                   <b>Description: </b>${item.descriptions} -
-                  <b>Author:</b>${item.author}
+                  <b>Author: </b>${item.author}
                 </li>
               `
             )}
           </ul>
         `
       : html` ${this.images.map(
-          item => html` <accent-card
+          item => html`
+          <accent-card
             image-src="${item.image}"
-            accent-color="red"
+            accent-color="blue"
             accent-heading
-            style="max-width:1000px;"
+            style="max-width:2000px;"
           >
-            <div slot="heading">${item.heading}</div>
-            <div slot="content">${item.descriptions}</div>
-            <div slot="content">Credit: ${item.author}</div>
-          </accent-card>`
+            <div slot="heading"><a href="${item.image}" target="_blank">${item.heading}</a></div>
+            <div slot="content"><b>Description: </b>${item.descriptions}</div>
+            <div slot="content"><b>Credit: </b>${item.author}</div>
+          ></accent-card>`
         )}`}`;
   }
 }
