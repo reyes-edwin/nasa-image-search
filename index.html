@@ -114,7 +114,8 @@
 
     <nasa-image-search id="images"></nasa-image-search>
     <script type="module">
-      import "./src/NasaImageSearch.js";
+      import "/src/NasaImageSearch.js";
+
       const checkbox = document.getElementById('dataOnly');
       checkbox.addEventListener('change', (e) => {
       e.currentTarget.checked ? document.querySelector("#images").listOnly = true : document.querySelector("#images").listOnly = false;
