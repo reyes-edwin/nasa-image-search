@@ -1,5 +1,5 @@
-import { LitElement, html, css } from 'lit';
-import '@lrnwebcomponents/accent-card/accent-card.js';
+import { html, css, LitElement } from 'lit';
+import '@lrnwebcomponents/accent-card';
 
 class NasaImageSearch extends LitElement {
   constructor() {
