@@ -17,11 +17,17 @@
         background-color: #f8f8f8;
       }
 
-      #fields {
-        margin-bottom: 30px;
+      .fields {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 200px;
       }
+
+
       #getData {
         margin-top: 20px;
+        margin-bottom: 20px;
         font-weight: bold;
         padding: 10px;
         width: 100px;
@@ -34,37 +40,9 @@
         color: white;
         background-color: #0b3d91;
       }
-      #load {
-        margin-top: 5px;
-      }
-      #dataOnly {
+
+      .flex-2 {
         margin-top: 10px;
-      }
-
-      #load {
-        width: 200px;
-        padding: 10px;
-        margin-bottom: 10px;
-      }
-
-      #page {
-        margin-top: 5px;
-        margin-bottom: 10px;
-        padding: 10px;
-        width: 200px;
-      }
-
-      #start {
-        margin-top: 5px;
-        margin-bottom: 10px;
-        padding: 10px;
-        width: 200px;
-      }
-
-      #end {
-        margin-top: 5px;
-        padding: 10px;
-        width: 200px;
       }
 
       img {
@@ -75,10 +53,27 @@
       input {
         border: 2px solid black;
         border-radius: 10px;
+        padding: 12px;
       }
+
       label {
         font-size: 18px;
-        font-weight: 700;
+        font-weight: 400;
+      }
+      @media (max-width: 600px) {
+        img {
+          width: 100px;
+        }
+        h1 {
+          font-size: 18px;
+        }
+        .fields {
+          width: 175px;
+        }
+        label {
+          font-size: 14px;
+          font-weight: 400;
+        }
       }
     </style>
     <title>Nasa Image Search</title>
@@ -86,32 +81,24 @@
 
   <body>
     <header>
-      <img src="./assets/nasa.png" alt="nasa-logo">
+      <img  src="./assets/nasa.png" alt="nasa-logo">
       <h1>Nasa Image Search</h1>
     </header>
-    <div id="fields">
-      <label for="load">Search Images</label>
-      <br>
+    <div class="fields">
+      <label for="load" class="one">Search Images</label>
       <input id="load" type="text" placeholder="Search Images" />
-      <br>
       <label for="page">Page Number</label>
-      <br>
       <input id="page" type="text" placeholder="Page Number" />
-      <br>
       <label for="start">Start Year</label>
-      <br>
       <input id="start" type="text" placeholder="Start Year">
-      <br>
       <label for="end">End Year</label>
-      <br>
       <input id="end" type="text" placeholder="End Year">
-      <br>
-      <label for="dataOnly">Data only:</label>
-      <input id="dataOnly" type="checkbox"></input>
-      <br>
-      <button id="getData">Search</button>
     </div>
-
+    <div class="flex-2">
+      <label for="dataOnly" class="label">Data only:</label>
+      <input id="dataOnly" type="checkbox"></input>
+    </div>
+    <button id="getData">Search</button>
     <nasa-image-search id="images"></nasa-image-search>
     <script type="module">
       import './src/NasaImageSearch.js';
