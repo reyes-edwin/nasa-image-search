@@ -88,17 +88,17 @@
     </header>
     <div class="fields">
       <label for="load" class="one">Search Images</label>
-      <input id="load" type="text" placeholder="Search Images" />
+      <input id="load" type="text" placeholder="Search Images"  autofocus required>
       <label for="page">Page Number</label>
-      <input id="page" type="text" placeholder="Page Number" />
+      <input id="page" type="text" placeholder="Page Number" required>
       <label for="start">Start Year</label>
-      <input id="start" type="text" placeholder="Start Year">
+      <input id="start" type="text" placeholder="Start Year" required>
       <label for="end">End Year</label>
-      <input id="end" type="text" placeholder="End Year">
+      <input id="end" type="text" placeholder="End Year" required>
     </div>
     <div class="flex-2">
       <label for="dataOnly" class="label">Data only:</label>
-      <input id="dataOnly" type="checkbox"></input>
+      <input id="dataOnly" type="checkbox"required>
     </div>
     <button id="getData">Search</button>
     <nasa-image-search id="images"></nasa-image-search>
