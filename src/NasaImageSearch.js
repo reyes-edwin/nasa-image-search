@@ -12,7 +12,8 @@ class NasaImageSearch extends LitElement {
     this.year_start = 2000;
     this.year_end = 2021;
   }
-
+  // year_start is _ cased while loadData is camel, pick a convention
+  // though camel and then attribute reflected to same value is my personal preference for readability
   static get properties() {
     return {
       images: { type: Array },
@@ -35,6 +36,12 @@ class NasaImageSearch extends LitElement {
 
   updated(changedProperties) {
     changedProperties.forEach((oldValue, propName) => {
+      // because of how this works imagine the following
+      // changedProperties has 2 values that changed in its array
+      // 1 is name, next is page
+      // if that's the case it'll run name changes then immediately again when page changes
+      // this is just a needless web request and we attempt to reduce the noise across the internet when we can
+      // this also is why your element won't update on date values because there's nothing saying to rerun on them
       if (propName === 'name' && this[propName]) {
         this.getData();
       } else if (propName === 'page' && this[propName]) {
